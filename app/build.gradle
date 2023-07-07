@@ -1,6 +1,7 @@
 plugins {
-    id 'java'
     id 'application'
+    id 'checkstyle'
+    id 'jacoco'
 }
 
 group = 'hexlet.code'
@@ -14,18 +15,49 @@ repositories {
     mavenCentral()
 }
 
+checkstyle {
+    toolVersion = '10.3.3'
+}
+
+tasks.named('test', Test) {
+    useJUnitPlatform()
+}
+
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+//    JUnit 5
+    testImplementation(platform('org.junit:junit-bom:5.9.3'))
+    testImplementation('org.junit.jupiter:junit-jupiter')
 //    picocli
     implementation 'info.picocli:picocli:4.7.4'
     annotationProcessor 'info.picocli:picocli-codegen:4.7.4'
 //    jackson-databind
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+//    jackson-yaml
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.2'
+//    Apache Commons IO
+    implementation 'commons-io:commons-io:2.13.0'
 }
 
 test {
     useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+    finalizedBy jacocoTestReport
+}
+
+jacoco {
+    toolVersion = "0.8.10"
+    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
 }
 
 compileJava {

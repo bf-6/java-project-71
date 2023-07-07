@@ -11,9 +11,14 @@ import picocli.CommandLine.Parameters;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
-import java.util.concurrent.Callable;
 
+import java.util.TreeMap;
+import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Comparator;
+
+import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
 
 
@@ -70,9 +75,9 @@ class App implements Callable<Integer> {
         // Формируем из получившихся строк мапы
         ObjectMapper objectMapper = new ObjectMapper();
         TreeMap<String, Object> map1 =
-                objectMapper.readValue(content1, new TypeReference<>(){});
+                objectMapper.readValue(content1, new TypeReference<>() { });
         TreeMap<String, Object> map2 =
-                objectMapper.readValue(content2, new TypeReference<>(){});
+                objectMapper.readValue(content2, new TypeReference<>() { });
 
         // Объявляем список, в котором будем хранить результат сравнения
         List<String> diffList = new ArrayList<>();
@@ -87,7 +92,7 @@ class App implements Callable<Integer> {
         // и элемент второй мапы со знаком плюс
         // если ключ элемента первой мапы не содержится во второй мапе, то тогда
         // добавляем элемент первой мапы в список со знаком минус
-         for (Map.Entry<String, Object> entry1 : map1.entrySet()) {
+        for (Map.Entry<String, Object> entry1 : map1.entrySet()) {
             if (map2.containsKey(entry1.getKey())) {
                 for (Map.Entry<String, Object> entry2 : map2.entrySet()) {
                     if (entry1.getKey().equals(entry2.getKey())) {
@@ -108,7 +113,7 @@ class App implements Callable<Integer> {
         // то тогда добавляем элемент второй мапы в список со знаком плюс
         for (Map.Entry<String, Object> entry : map2.entrySet()) {
             if (!map1.containsKey((entry.getKey()))) {
-                diffList.add(("+" + " " +entry));
+                diffList.add(("+" + " " + entry));
             }
         }
 
