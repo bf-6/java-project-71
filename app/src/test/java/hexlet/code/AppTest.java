@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class AppTest {
 
     static String result;
@@ -18,17 +21,21 @@ public class AppTest {
 
     }
 
-//    Path resourceDirectory = Paths.get("src","test","resources");
-//    String absolutePath = resourceDirectory.toFile().getAbsolutePath();
-//    System.out.println(absolutePath);
-//    Assert.assertTrue(absolutePath.endsWith("src/test/resources"));
-
 //    Нудно добавить КодКлиман и покрытие тестами
 
     @Test
     public void testDiff() throws Exception {
 
-        assertEquals(result, App.differ());
+        String fileName1 = "file1.json";
+        String fileName2 = "file2.json";
+
+        Path resourceDirectory1 = Paths.get("src","test","resources", fileName1);
+        Path resourceDirectory2 = Paths.get("src","test","resources", fileName2);
+
+        String absolutePath1 = resourceDirectory1.toFile().getAbsolutePath();
+        String absolutePath2 = resourceDirectory2.toFile().getAbsolutePath();
+
+        assertEquals(result, App.differ(absolutePath1, absolutePath2));
 
     }
 }

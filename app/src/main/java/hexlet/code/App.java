@@ -34,10 +34,10 @@ class App implements Callable<Integer> {
     static String format;
 
     @Parameters(paramLabel = "filepath1", description = "path to first file")
-    static String filepath1 = "/home/nikita/java-project-71/app/src/test/resources/file1.json";
+    static String filepath1;
 
     @Parameters(paramLabel = "filepath2", description = "path to second file")
-    static String filepath2 = "/home/nikita/java-project-71/app/src/test/resources/file2.json";
+    static String filepath2;
 
     public static void main(String... args) {
 
@@ -46,7 +46,7 @@ class App implements Callable<Integer> {
 
     }
 
-    public static String differ() throws Exception {
+    public static String differ(String filepath1, String filepath2) throws Exception {
 
         // Чтение файла:
         // Получаем путь к нужному файлу
@@ -132,7 +132,7 @@ class App implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
 
-        System.out.println(differ());
+        differ(filepath1, filepath2);
 
         return null;
     }
