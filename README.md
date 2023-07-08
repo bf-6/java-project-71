@@ -4,4 +4,4 @@
 
 
 ### Examples:
-[![asciicast](https://asciinema.org/a/8OlA0OLwUdEKuf62b1gR49Ptb.svg)](https://asciinema.org/a/8OlA0OLwUdEKuf62b1gR49Ptb)
+[![asciicast](https://asciinema.org/a/czYRRFt1kAs53aGrGiXtqfYns.svg)](https://asciinema.org/a/czYRRFt1kAs53aGrGiXtqfYns)

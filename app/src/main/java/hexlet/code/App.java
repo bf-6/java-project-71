@@ -1,8 +1,6 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import org.apache.commons.io.FilenameUtils;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -12,7 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import java.util.TreeMap;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
@@ -71,26 +68,25 @@ class App implements Callable<Integer> {
         String content1 = Files.readString(path1);
         String content2 = Files.readString(path2);
 
+        // Определяем формат файла, который нужно распарсить,
+        // с помощью метода getExtension класса FilenameUtils из библиотеки Apache Commons IO
+        String dataFormat1 = FilenameUtils.getExtension(path1.toString());
+        String dataFormat2 = FilenameUtils.getExtension(path2.toString());
+
         // Формируем из получившихся строк мапы
-        ObjectMapper objectMapper = new ObjectMapper();
-        TreeMap<String, Object> map1 =
-                objectMapper.readValue(content1, new TypeReference<>() { });
-        TreeMap<String, Object> map2 =
-                objectMapper.readValue(content2, new TypeReference<>() { });
+        Map<String, Object> map1 = Parser.parser(content1, dataFormat1);
+        Map<String, Object> map2 = Parser.parser(content2, dataFormat2);
 
         // Объявляем список, в котором будем хранить результат сравнения
         List<String> diffList = new ArrayList<>();
 
-        // Начинаем перебор элементов первой мапы,
-        // если ключ элемента первой мапы содержится во второй мапе,
-        // то тогда начинаем перебор элементов второй мапы,
-        // если ключ элемента первой мапы равен ключу элемента второй мапы,
-        // то тогда сравниваем значение элемента первой мапы со значением элемента второй мапы,
-        // если они равны, то тогда добавляем элемент первой мапы в список без каких-либо знаков,
-        // если элементы мап не равны, то тогда добавляем в список элемент первый мапы со знаком минус
-        // и элемент второй мапы со знаком плюс
-        // если ключ элемента первой мапы не содержится во второй мапе, то тогда
-        // добавляем элемент первой мапы в список со знаком минус
+//         * Начинаем перебор элементов первой мапы, если ключ элемента первой мапы содержится во второй мапе,
+//         * то тогда начинаем перебор элементов второй мапы, если ключ элемента первой мапы равен ключу элемента
+//         * второй мапы, то тогда сравниваем значение элемента первой мапы со значением элемента второй мапы,
+//         * если они равны, то тогда добавляем элемент первой мапы в список без каких-либо знаков, если элементы
+//         * мап не равны, то тогда добавляем в список элемент первый мапы со знаком минус и элемент второй мапы
+//         * со знаком плюс если ключ элемента первой мапы не содержится во второй мапе, то тогда добавляем элемент
+//         * первой мапы в список со знаком минус
         for (Map.Entry<String, Object> entry1 : map1.entrySet()) {
             if (map2.containsKey(entry1.getKey())) {
                 for (Map.Entry<String, Object> entry2 : map2.entrySet()) {
