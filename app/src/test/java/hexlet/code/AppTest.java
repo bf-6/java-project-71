@@ -23,6 +23,8 @@ public class AppTest {
 //    System.out.println(absolutePath);
 //    Assert.assertTrue(absolutePath.endsWith("src/test/resources"));
 
+//    Нудно добавить КодКлиман и покрытие тестами
+
     @Test
     public void testDiff() throws Exception {
 
