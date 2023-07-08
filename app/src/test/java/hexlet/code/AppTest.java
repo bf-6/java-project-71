@@ -29,8 +29,8 @@ public class AppTest {
         String fileName1 = "file1.json";
         String fileName2 = "file2.json";
 
-        Path resourceDirectory1 = Paths.get("src","test","resources", fileName1);
-        Path resourceDirectory2 = Paths.get("src","test","resources", fileName2);
+        Path resourceDirectory1 = Paths.get("src", "test", "resources", fileName1);
+        Path resourceDirectory2 = Paths.get("src", "test", "resources", fileName2);
 
         String absolutePath1 = resourceDirectory1.toFile().getAbsolutePath();
         String absolutePath2 = resourceDirectory2.toFile().getAbsolutePath();

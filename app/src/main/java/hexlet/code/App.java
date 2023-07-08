@@ -46,12 +46,12 @@ class App implements Callable<Integer> {
 
     }
 
-    public static String differ(String filepath1, String filepath2) throws Exception {
+    public static String differ(String pathToFile1, String pathToFile2) throws Exception {
 
         // Чтение файла:
         // Получаем путь к нужному файлу
-        Path readFilePath1 = Paths.get(filepath1);
-        Path readFilePath2 = Paths.get(filepath2);
+        Path readFilePath1 = Paths.get(pathToFile1);
+        Path readFilePath2 = Paths.get(pathToFile2);
 
         // Формируем абсолютный путь,
         // если filePath будет содержать относительный путь,
