@@ -3,7 +3,6 @@ package hexlet.code;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 
 import java.util.Map;
 
@@ -28,10 +27,9 @@ public class Parser {
     }
 
     public static Map parsingYml(String yml) throws Exception {
-        ObjectMapper objectMapper1 = new ObjectMapper(new YAMLFactory());
-        ObjectMapper objectMapper = new YAMLMapper();
+        ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
         Map<String, Object> map
-                = objectMapper1.readValue(yml, new TypeReference<Map<String, Object>>() { });
+                = objectMapper.readValue(yml, new TypeReference<Map<String, Object>>() { });
         return map;
     }
 

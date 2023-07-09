@@ -41,8 +41,8 @@ public class AppTest {
         String absolutePath3 = resourceDirectory3.toFile().getAbsolutePath();
         String absolutePath4 = resourceDirectory4.toFile().getAbsolutePath();
 
-        assertEquals(result, App.differ(absolutePath1, absolutePath2));
-        assertEquals(result, App.differ(absolutePath3, absolutePath4));
+        assertEquals(result, Differ.differ(absolutePath1, absolutePath2));
+        assertEquals(result, Differ.differ(absolutePath3, absolutePath4));
 
     }
 }
