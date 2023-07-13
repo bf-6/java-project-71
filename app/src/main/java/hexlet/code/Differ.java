@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import hexlet.code.formatters.Stylish;
 import org.apache.commons.io.FilenameUtils;
 
 import java.nio.file.Files;
@@ -81,5 +82,9 @@ public class Differ {
 
         return str.replace("=", ": ");
 
+    }
+
+    public static String differ(String pathFile1, String pathFile2) throws Exception {
+        return differ(pathFile1, pathFile2, "stylish");
     }
 }
