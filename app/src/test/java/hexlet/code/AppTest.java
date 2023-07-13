@@ -5,23 +5,24 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class AppTest {
 
     static String result;
+    static String stylish = "stylish";
 
     @BeforeAll
-    public static void beforeAll() {
+    public static void beforeAll() throws IOException {
 
-        result = "{\n" + " + apt: install\n" + " - follow: false\n"
-            + "   host: hexlet.io\n" + " - proxy: 123.234.53.22\n"
-            + " + timeout: 20\n" + " - timeout: 50\n" + " + verbose: true\n" + "}";
+        Path resourceDirectory = Paths.get("src", "test", "resources", "result.txt");
+//        Path absolutePath = resourceDirectory.toAbsolutePath().normalize();
+        result = Files.readString(resourceDirectory);
 
     }
-
-//    Нужно добавить КодКлиман и покрытие тестами
 
     @Test
     public void testDiff() throws Exception {
@@ -41,8 +42,8 @@ public class AppTest {
         String absolutePath3 = resourceDirectory3.toFile().getAbsolutePath();
         String absolutePath4 = resourceDirectory4.toFile().getAbsolutePath();
 
-        assertEquals(result, Differ.differ(absolutePath1, absolutePath2));
-        assertEquals(result, Differ.differ(absolutePath3, absolutePath4));
+        assertEquals(result, Differ.differ(absolutePath1, absolutePath2, stylish));
+        assertEquals(result, Differ.differ(absolutePath3, absolutePath4, stylish));
 
     }
 }

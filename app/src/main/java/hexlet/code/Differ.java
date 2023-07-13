@@ -5,15 +5,13 @@ import org.apache.commons.io.FilenameUtils;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+
 import java.util.Map;
-import java.util.regex.Pattern;
+import java.util.TreeMap;
 
 public class Differ {
 
-    public static String differ(String pathToFile1, String pathToFile2) throws Exception {
+    public static String differ(String pathToFile1, String pathToFile2, String format) throws Exception {
 
         // Чтение файла:
         // Получаем путь к нужному файлу
@@ -48,49 +46,38 @@ public class Differ {
         Map<String, Object> map2 = Parser.parser(content2, dataFormat2);
 
         // Объявляем список, в котором будем хранить результат сравнения
-        List<String> diffList = new ArrayList<>();
+//        List<String> diffList = new ArrayList<>();
 
-//         * Начинаем перебор элементов первой мапы, если ключ элемента первой мапы содержится во второй мапе,
-//         * то тогда начинаем перебор элементов второй мапы, если ключ элемента первой мапы равен ключу элемента
-//         * второй мапы, то тогда сравниваем значение элемента первой мапы со значением элемента второй мапы,
-//         * если они равны, то тогда добавляем элемент первой мапы в список без каких-либо знаков, если элементы
-//         * мап не равны, то тогда добавляем в список элемент первый мапы со знаком минус и элемент второй мапы
-//         * со знаком плюс если ключ элемента первой мапы не содержится во второй мапе, то тогда добавляем элемент
-//         * первой мапы в список со знаком минус
+        // Создаем мапу для результата сравнения двух файлов
+        TreeMap<String, String> resultDiffMap = new TreeMap<>();
+
         for (Map.Entry<String, Object> entry1 : map1.entrySet()) {
             if (map2.containsKey(entry1.getKey())) {
                 for (Map.Entry<String, Object> entry2 : map2.entrySet()) {
                     if (entry1.getKey().equals(entry2.getKey())) {
                         if (entry1.toString().equals(entry2.toString())) {
-                            diffList.add(" " + " " + entry1);
+                            resultDiffMap.put(entry1.toString(), "unchanged");
                         } else {
-                            diffList.add("-" + " " + entry1);
-                            diffList.add("+" + " " + entry2);
+                            resultDiffMap.put(entry1.toString(), "deleteOldValue");
+                            resultDiffMap.put(entry2.toString(), "addNewValue");
                         }
                     }
                 }
             } else {
-                diffList.add("-" + " " + entry1);
+                resultDiffMap.put(entry1.toString(), "deleted");
             }
         }
-        // Начинаем перебор элементов второй мапы
-        // если ключ элемента второй мапы не содержится в первой мапе,
-        // то тогда добавляем элемент второй мапы в список со знаком плюс
+
         for (Map.Entry<String, Object> entry : map2.entrySet()) {
             if (!map1.containsKey((entry.getKey()))) {
-                diffList.add(("+" + " " + entry));
+                resultDiffMap.put(entry.toString(), "added");
             }
         }
 
-        // Сортируем получившийся список игнорируя пробелы и специальные символы
-        Pattern p = Pattern.compile("[^\\p{L}\\p{N}]+");
-        diffList.sort(Comparator.comparing(s -> p.matcher(s).replaceAll("")));
+//        List<String> diffList = new ArrayList<>(resultDiffMap.values());
 
         // Приводим список к строке в отформатированном виде
-        String str = "{\n " + String.join("\n ", diffList) + "\n}";
-
-        // Выводим результат на экран заменив символ "=" на ": "
-        System.out.println(str.replace("=", ": "));
+        String str = "{\n " + String.join("\n ", Stylish.stylishReturn(resultDiffMap)) + "\n}";
 
         return str.replace("=", ": ");
 
