@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Parser {
 
-    public static Map parser(String fileContent, String dataFormat) throws Exception {
+    public static Map parsingFile(String fileContent, String dataFormat) throws Exception {
 
         if (dataFormat.equals("json")) {
             return parsingJson(fileContent);

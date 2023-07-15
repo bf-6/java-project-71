@@ -1,14 +1,16 @@
 package hexlet.code.formatters;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 //import java.util.Comparator;
 //import java.util.regex.Pattern;
 
 public class Stylish {
 
-    public static List<String> stylishReturn(Map<String, String> resultDiffMap) {
+    public static String stylishReturn(Map<String, String> resultDiffMap) {
 
         List<String> diffList = new ArrayList<>();
 
@@ -32,11 +34,9 @@ public class Stylish {
             }
         }
 
-        // Сортируем получившийся список игнорируя пробелы и специальные символы
-//        Pattern p = Pattern.compile("[^\\p{L}\\p{N}]+");
-//        diffList.sort(Comparator.comparing(s -> p.matcher(s).replaceAll("")));
+        String str = "{\n " + String.join("\n ", diffList) + "\n}";
 
-        return diffList;
+        return str;
 
     }
 }

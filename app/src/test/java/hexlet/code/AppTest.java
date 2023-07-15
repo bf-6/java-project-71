@@ -11,8 +11,8 @@ import java.nio.file.Paths;
 
 public class AppTest {
 
-    static String result;
     private static String resultStylish;
+    private static String resultPlain;
 
     private static Path pathToFile(String fileName) {
         Path path = Paths.get("src", "test", "resources", fileName);
@@ -28,6 +28,7 @@ public class AppTest {
     public static void beforeAll() throws Exception {
 
         resultStylish = readFile("result_stylish.txt");
+        resultPlain = readFile("result_plain.txt");
 
     }
 
@@ -41,7 +42,7 @@ public class AppTest {
 
         assertEquals(resultStylish, Differ.differ(filePath1, filePath2));
         assertEquals(resultStylish, Differ.differ(filePath1, filePath2, "stylish"));
-        assertEquals(resultStylish, Differ.differ(filePath3, filePath4));
+        assertEquals(resultPlain, Differ.differ(filePath3, filePath4));
 
     }
 }

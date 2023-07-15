@@ -1,12 +1,5 @@
 package hexlet.code;
 
-import hexlet.code.formatters.Stylish;
-import org.apache.commons.io.FilenameUtils;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -14,40 +7,9 @@ public class Differ {
 
     public static String differ(String pathToFile1, String pathToFile2, String format) throws Exception {
 
-        // Чтение файла:
-        // Получаем путь к нужному файлу
-        Path readFilePath1 = Paths.get(pathToFile1);
-        Path readFilePath2 = Paths.get(pathToFile2);
-
-        // Формируем абсолютный путь,
-        // если filePath будет содержать относительный путь,
-        // то мы всегда будет работать с абсолютным
-        Path path1 = readFilePath1.toAbsolutePath().normalize();
-        Path path2 = readFilePath2.toAbsolutePath().normalize();
-
-        // Проверяем существование файла
-        if (!Files.exists(path1)) {
-            throw new Exception("File '" + path1 + "' does not exist");
-        }
-        if (!Files.exists(path2)) {
-            throw new Exception("File '" + path2 + "' does not exist");
-        }
-
-        // Читаем файл и записываем содержимое в переменные
-        String content1 = Files.readString(path1);
-        String content2 = Files.readString(path2);
-
-        // Определяем формат файла, который нужно распарсить,
-        // с помощью метода getExtension класса FilenameUtils из библиотеки Apache Commons IO
-        String dataFormat1 = FilenameUtils.getExtension(path1.toString());
-        String dataFormat2 = FilenameUtils.getExtension(path2.toString());
-
         // Формируем из получившихся строк мапы
-        Map<String, Object> map1 = Parser.parser(content1, dataFormat1);
-        Map<String, Object> map2 = Parser.parser(content2, dataFormat2);
-
-        // Объявляем список, в котором будем хранить результат сравнения
-//        List<String> diffList = new ArrayList<>();
+        Map<String, Object> map1 = ContentFromFile.getContentFromFile(pathToFile1);
+        Map<String, Object> map2 = ContentFromFile.getContentFromFile(pathToFile2);
 
         // Создаем мапу для результата сравнения двух файлов
         TreeMap<String, String> resultDiffMap = new TreeMap<>();
@@ -75,10 +37,8 @@ public class Differ {
             }
         }
 
-//        List<String> diffList = new ArrayList<>(resultDiffMap.values());
-
         // Приводим список к строке в отформатированном виде
-        String str = "{\n " + String.join("\n ", Stylish.stylishReturn(resultDiffMap)) + "\n}";
+        String str = Formatter.formatSelection(resultDiffMap, format);
 
         return str.replace("=", ": ");
 
