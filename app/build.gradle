@@ -39,15 +39,10 @@ dependencies {
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.2'
 //    Apache Commons IO
     implementation 'commons-io:commons-io:2.13.0'
-
 }
 
 test {
     useJUnitPlatform()
-    testLogging {
-        events "passed", "skipped", "failed"
-    }
-    finalizedBy jacocoTestReport
 }
 
 jacoco {
@@ -55,15 +50,16 @@ jacoco {
     reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
 }
 
-jacocoTestReport {
-    dependsOn test
-    reports {
-        xml.required = true
-        html.required = true
-    }
-}
-
 compileJava {
     options.release = 17
-    options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
+}
+
+testlogger {
+    showStandardStreams true
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
 }
