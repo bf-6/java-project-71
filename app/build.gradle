@@ -45,11 +45,6 @@ test {
     useJUnitPlatform()
 }
 
-jacoco {
-    toolVersion = "0.8.10"
-    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
-}
-
 compileJava {
     options.release = 17
 }
@@ -61,5 +56,6 @@ testlogger {
 jacocoTestReport {
     reports {
         xml.required = true
+        html.required = true
     }
 }
