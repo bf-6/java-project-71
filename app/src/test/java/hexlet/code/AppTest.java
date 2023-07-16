@@ -40,9 +40,10 @@ public class AppTest {
         String filePath3 = pathToFile("file3.yml").toString();
         String filePath4 = pathToFile("file4.yml").toString();
 
-        assertEquals(resultStylish, Differ.differ(filePath1, filePath2));
-        assertEquals(resultStylish, Differ.differ(filePath1, filePath2, "stylish"));
-        assertEquals(resultPlain, Differ.differ(filePath3, filePath4));
+        assertEquals(resultStylish, Differ.generate(filePath1, filePath2));
+        assertEquals(resultStylish, Differ.generate(filePath1, filePath2, "stylish"));
+        assertEquals(resultPlain, Differ.generate(filePath3, filePath4, "plain"));
+        assertEquals(resultPlain, Differ.generate(filePath1, filePath2, "plain"));
 
     }
 }

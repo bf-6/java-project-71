@@ -27,6 +27,7 @@ tasks.named('test', Test) {
 dependencies {
 //    JUnit 5
     implementation 'org.junit.jupiter:junit-jupiter:5.10.0-RC1'
+    implementation 'org.jetbrains:annotations:24.0.0'
     testImplementation(platform('org.junit:junit-bom:5.9.3'))
     testImplementation('org.junit.jupiter:junit-jupiter')
 //    picocli
@@ -38,6 +39,9 @@ dependencies {
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.2'
 //    Apache Commons IO
     implementation 'commons-io:commons-io:2.13.0'
+
+    implementation 'org.apache.commons:commons-lang3:3.0'
+
 }
 
 test {

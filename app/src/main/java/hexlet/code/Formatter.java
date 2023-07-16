@@ -1,17 +1,20 @@
 package hexlet.code;
 
+import hexlet.code.formatters.Plain;
 import hexlet.code.formatters.Stylish;
 
-import java.util.TreeMap;
+import java.util.List;
+import java.util.Map;
 
 public class Formatter {
 
-    public static String formatSelection(TreeMap<String, String> resultDiffMap, String format) {
+    public static String formatSelection(List<Map<String, Object>> resultDiffList, String format) {
 
-        if (format.equals("stylish")) {
-            return Stylish.stylishReturn(resultDiffMap);
+        if (format.equals("plain")) {
+            return Plain.plainReturn(resultDiffList);
+        } else {
+            return Stylish.stylishReturn(resultDiffList);
         }
-        return null;
 
     }
 

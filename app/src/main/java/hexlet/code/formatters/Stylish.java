@@ -1,36 +1,27 @@
 package hexlet.code.formatters;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
-//import java.util.Comparator;
-//import java.util.regex.Pattern;
 
 public class Stylish {
 
-    public static String stylishReturn(Map<String, String> resultDiffMap) {
+    public static String stylishReturn(List<Map<String, Object>> resultDiffMap) {
 
         List<String> diffList = new ArrayList<>();
 
-        for (Map.Entry<String, String> entry : resultDiffMap.entrySet()) {
-            if (entry.getValue().equals("unchanged")) {
-                diffList.add(" " + " " + entry.getKey());
-            } else {
-                if (entry.getValue().equals("deleteOldValue")) {
-                    diffList.add("-" + " " + entry.getKey());
-                } else {
-                    if (entry.getValue().equals("addNewValue")) {
-                        diffList.add("+" + " " + entry.getKey());
-                    } else {
-                        if (entry.getValue().equals("deleted")) {
-                            diffList.add("-" + " " + entry.getKey());
-                        } else {
-                            diffList.add(("+" + " " + entry.getKey()));
-                        }
-                    }
+        for (Map<String, Object> map: resultDiffMap) {
+            switch (map.get("status").toString()) {
+                case "unchanged" ->
+                        diffList.add(" " + " " + map.get("key") + ": " + map.get("value"));
+                case "changed" -> {
+                    diffList.add("-" + " " + map.get("key") + ": " + map.get("value1"));
+                    diffList.add("+" + " " + map.get("key") + ": " + map.get("value2"));
                 }
+                case "deleted" ->
+                        diffList.add("-" + " " + map.get("key") + ": " + map.get("value1"));
+                case "added" -> diffList.add("+" + " " + map.get("key") + ": " + map.get("value2"));
+                default -> throw new RuntimeException("Unknown type!" + map.get("status"));
             }
         }
 

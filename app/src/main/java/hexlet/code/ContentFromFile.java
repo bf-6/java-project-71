@@ -31,8 +31,8 @@ public class ContentFromFile {
         // с помощью метода getExtension класса FilenameUtils из библиотеки Apache Commons IO
         String dataFormat = FilenameUtils.getExtension(path.toString());
 
-        // Формируем из получившихся строк мапы
-        Map<String, Object> mapContent = Parser.parsingFile(content, dataFormat);
+        // Формируем из строки мапу
+        var mapContent = Parser.parsingFile(content, dataFormat);
 
         return mapContent;
     }

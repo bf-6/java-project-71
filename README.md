@@ -6,4 +6,4 @@
 
 
 ### Examples:
-[![asciicast](https://asciinema.org/a/BQg5AL2ufX7v1GoGSGsoghqrR.svg)](https://asciinema.org/a/BQg5AL2ufX7v1GoGSGsoghqrR)
+[![asciicast](https://asciinema.org/a/Dr2anWGanEQ6t2TK8xtpUANYf.svg)](https://asciinema.org/a/Dr2anWGanEQ6t2TK8xtpUANYf)
