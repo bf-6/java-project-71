@@ -13,6 +13,7 @@ public class AppTest {
 
     private static String resultStylish;
     private static String resultPlain;
+    private static String resultJson;
 
     private static Path pathToFile(String fileName) {
         Path path = Paths.get("src", "test", "resources", fileName);
@@ -29,6 +30,7 @@ public class AppTest {
 
         resultStylish = readFile("result_stylish.txt");
         resultPlain = readFile("result_plain.txt");
+        resultJson = readFile("result_json.json");
 
     }
 
@@ -43,7 +45,8 @@ public class AppTest {
         assertEquals(resultStylish, Differ.generate(filePath1, filePath2));
         assertEquals(resultStylish, Differ.generate(filePath1, filePath2, "stylish"));
         assertEquals(resultPlain, Differ.generate(filePath3, filePath4, "plain"));
-        assertEquals(resultPlain, Differ.generate(filePath1, filePath2, "plain"));
+
+        assertEquals(resultJson, Differ.generate(filePath3, filePath4, "json"));
 
     }
 }
