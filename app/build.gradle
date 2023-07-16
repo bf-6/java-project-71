@@ -40,8 +40,6 @@ dependencies {
 //    Apache Commons IO
     implementation 'commons-io:commons-io:2.13.0'
 
-    implementation 'org.apache.commons:commons-lang3:3.0'
-
 }
 
 test {
@@ -60,9 +58,8 @@ jacoco {
 jacocoTestReport {
     dependsOn test
     reports {
-        xml.required = false
-        csv.required = false
-        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+        xml.required = true
+        html.required = true
     }
 }
 
