@@ -39,7 +39,6 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    finalizedBy jacocoTestReport
 }
 
 compileJava {
