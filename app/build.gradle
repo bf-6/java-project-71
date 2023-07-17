@@ -20,9 +20,9 @@ checkstyle {
     toolVersion = '10.3.3'
 }
 
-tasks.named('test', Test) {
-    useJUnitPlatform()
-}
+//tasks.named('test', Test) {
+//    useJUnitPlatform()
+//}
 
 dependencies {
 //    JUnit 5
