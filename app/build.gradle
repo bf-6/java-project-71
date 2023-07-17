@@ -59,3 +59,7 @@ jacocoTestReport {
         html.required = false
     }
 }
+
+jacoco {
+    toolVersion = "0.8.9"
+}
