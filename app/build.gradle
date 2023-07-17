@@ -38,8 +38,8 @@ dependencies {
 }
 
 test {
-    finalizedBy jacocoTestReport
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
 compileJava {
