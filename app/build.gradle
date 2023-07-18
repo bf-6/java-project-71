@@ -38,9 +38,9 @@ test {
     finalizedBy jacocoTestReport
 }
 
-//compileJava {
-//    options.release = 17
-//}
+compileJava {
+    options.release = 20
+}
 
 java {
     toolchain {
