@@ -25,7 +25,7 @@ public class Stylish {
             }
         }
 
-        String str = "{\n   " + String.join("\n ", diffList) + "\n}";
+        String str = "{\n " + String.join("\n ", diffList) + "\n}";
 
         return str;
 
