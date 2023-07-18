@@ -16,10 +16,6 @@ repositories {
     mavenCentral()
 }
 
-checkstyle {
-    toolVersion = '10.3.3'
-}
-
 dependencies {
 //    JUnit 5
     implementation 'org.junit.jupiter:junit-jupiter:5.10.0-RC1'
@@ -42,8 +38,14 @@ test {
     finalizedBy jacocoTestReport
 }
 
-compileJava {
-    options.release = 20
+//compileJava {
+//    options.release = 17
+//}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(20)
+    }
 }
 
 testlogger {
