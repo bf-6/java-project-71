@@ -42,12 +42,6 @@ compileJava {
     options.release = 20
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(20)
-    }
-}
-
 testlogger {
     showStandardStreams true
 }
