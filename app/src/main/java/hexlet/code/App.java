@@ -16,13 +16,13 @@ import java.util.concurrent.Callable;
 class App implements Callable<Integer> {
 
     @Option(names = {"-f", "--format"}, defaultValue = "stylish", description = "Soutput format [default: stylish]")
-    static String format;
+    private static String format;
 
     @Parameters(paramLabel = "filepath1", description = "path to first file")
-    static String filepath1;
+    private static String filepath1;
 
     @Parameters(paramLabel = "filepath2", description = "path to second file")
-    static String filepath2;
+    private static String filepath2;
 
     public static void main(String... args) {
 
