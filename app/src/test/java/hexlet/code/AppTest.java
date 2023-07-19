@@ -2,6 +2,8 @@ package hexlet.code;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -34,19 +36,18 @@ public class AppTest {
 
     }
 
-    @Test
-    public void testDiff() throws Exception {
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yml"})
+    public void testDiff(String format) throws Exception {
 
-        String filePath1 = pathToFile("file1.json").toString();
-        String filePath2 = pathToFile("file2.json").toString();
-        String filePath3 = pathToFile("file3.yml").toString();
-        String filePath4 = pathToFile("file4.yml").toString();
+        String filePath1 = pathToFile("file1." + format).toString();
+        String filePath2 = pathToFile("file2." + format).toString();
 
         assertEquals(resultStylish, Differ.generate(filePath1, filePath2));
         assertEquals(resultStylish, Differ.generate(filePath1, filePath2, "stylish"));
-        assertEquals(resultPlain, Differ.generate(filePath3, filePath4, "plain"));
+        assertEquals(resultPlain, Differ.generate(filePath1, filePath2, "plain"));
+        assertEquals(resultJson, Differ.generate(filePath1, filePath2, "json"));
 
-        assertEquals(resultJson, Differ.generate(filePath3, filePath4, "json"));
 
     }
 }

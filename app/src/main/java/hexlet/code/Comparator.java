@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.TreeMap;
 import java.util.stream.Stream;
 
-public class CompareFiles {
+public class Comparator {
 
     public static final String UNCHANGED = "unchanged";
     public static final String ADDED = "added";
@@ -27,7 +27,7 @@ public class CompareFiles {
                 // сортируем получившийся поток по ключу comparingByKey() с помощью метода sorted()
                 .sorted(Map.Entry.comparingByKey())
                 // передаем элемент потока в метод
-                .map(CompareFiles::compareResult)
+                .map(Comparator::compareResult)
                 .distinct()
                 // с помощью потока toList() преобразуем поток в список.
                 .toList();

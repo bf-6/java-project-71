@@ -16,6 +16,10 @@ repositories {
     mavenCentral()
 }
 
+checkstyle {
+    toolVersion = '10.3.3'
+}
+
 dependencies {
 //    JUnit 5
     implementation 'org.junit.jupiter:junit-jupiter:5.10.0-RC1'

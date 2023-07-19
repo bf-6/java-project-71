@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Parser {
 
-    public static Map parsingFile(String fileContent, String dataFormat) throws Exception {
+    public static Map parsing(String fileContent, String dataFormat) throws Exception {
 
         // Проверяем формат, если "json", то передаём файл в parsingJson
         // иначе передаем файл в parsingYml, если формат окажется неподходящим -

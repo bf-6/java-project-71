@@ -13,15 +13,11 @@ public class Formatter {
     public static String formatSelection(List<Map<String, Object>> resultDiffList, String format)
             throws JsonProcessingException {
 
-        if (format.equals("plain")) {
-            return Plain.plainReturn(resultDiffList);
-        } else {
-            if (format.equals("json")) {
-                return Json.jsonReturn(resultDiffList);
-            } else {
-                return Stylish.stylishReturn(resultDiffList);
-            }
-        }
+        return switch (format) {
+            case "plain" -> Plain.plainReturn(resultDiffList);
+            case "json" -> Json.jsonReturn(resultDiffList);
+            default -> Stylish.stylishReturn(resultDiffList);
+        };
 
     }
 
