@@ -4,11 +4,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class AppTest {
 
@@ -37,16 +37,18 @@ public class AppTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"json", "yml"})
-    public static void testDiff(String format) throws Exception {
+    public void testDiff(String format) throws Exception {
 
         String filePath1 = pathToFile("file1." + format).toString();
         String filePath2 = pathToFile("file2." + format).toString();
 
-        assertEquals(resultStylish, Differ.generate(filePath1, filePath2));
-        assertEquals(resultStylish, Differ.generate(filePath1, filePath2, "stylish"));
-        assertEquals(resultPlain, Differ.generate(filePath1, filePath2, "plain"));
-        assertEquals(resultJson, Differ.generate(filePath1, filePath2, "json"));
-
+        assertThat(Differ.generate(filePath1, filePath2)).isEqualTo(resultStylish);
+        assertThat(Differ.generate(filePath1, filePath2, "stylish"))
+                .isEqualTo(resultStylish);
+        assertThat(Differ.generate(filePath1, filePath2, "plain"))
+                .isEqualTo(resultPlain);
+        assertThat(Differ.generate(filePath1, filePath2, "json"))
+                .isEqualTo(resultJson);
 
     }
 }

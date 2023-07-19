@@ -35,6 +35,8 @@ dependencies {
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.2'
 //    Apache Commons IO
     implementation 'commons-io:commons-io:2.13.0'
+//    assertj
+    testImplementation("org.assertj:assertj-core:3.24.2")
 }
 
 test {
