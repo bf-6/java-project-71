@@ -8,15 +8,15 @@ import java.util.Map;
 
 public class Parser {
 
-    public static Map parsing(String fileContent, String dataFormat) throws Exception {
+    public static Map parse(String content, String dataFormat) throws Exception {
 
         // Проверяем формат, если "json", то передаём файл в parsingJson
         // иначе передаем файл в parsingYml, если формат окажется неподходящим -
         // выведем исключение
         if (dataFormat.equals("json")) {
-            return parsingJson(fileContent);
+            return parsingJson(content);
         } else if (dataFormat.equals("yml") || dataFormat.equals("yaml")) {
-            return parsingYml(fileContent);
+            return parsingYml(content);
         }
         throw new Exception("Unknown format: '" + dataFormat + "'");
 

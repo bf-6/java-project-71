@@ -16,7 +16,8 @@ public class Formatter {
         return switch (format) {
             case "plain" -> Plain.plainReturn(resultDiffList);
             case "json" -> Json.jsonReturn(resultDiffList);
-            default -> Stylish.stylishReturn(resultDiffList);
+            case "stylish" -> Stylish.stylishReturn(resultDiffList);
+            default -> throw new RuntimeException("Unknown type: '" + format + "'");
         };
 
     }

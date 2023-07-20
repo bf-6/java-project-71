@@ -54,6 +54,6 @@ public class Differ {
         String dataFormat = FilenameUtils.getExtension(path.toString());
 
         // Парсинг выделяем в отдельный модуль
-        return Parser.parsing(content, dataFormat);
+        return Parser.parse(content, dataFormat);
     }
 }

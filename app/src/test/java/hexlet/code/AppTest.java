@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AppTest {
+final class AppTest {
 
     private static String resultStylish;
     private static String resultPlain;
