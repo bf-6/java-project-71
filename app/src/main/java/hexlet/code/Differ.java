@@ -17,7 +17,7 @@ public class Differ {
         Map<String, Object> map2 = getData(pathToFile2);
 
         // Создаем список и записываем в него результат сравнения наших мап
-        List<Map<String, Object>> resultDiffList = Comparator.diff(map1, map2);
+        List<Map<String, Object>> resultDiffList = CompareEntities.diff(map1, map2);
 
         // Приводим список к строке в отформатированном виде
         String str = Formatter.formatSelection(resultDiffList, format);

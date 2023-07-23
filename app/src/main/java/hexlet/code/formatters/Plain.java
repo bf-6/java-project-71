@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Plain {
-    private static final String COMPLEX_VALUE = "[complex value]";
 
     public static String plainReturn(List<Map<String, Object>> resultDiffMap) {
 
@@ -40,12 +39,10 @@ public class Plain {
         if (value == null) {
             return null;
         }
-        if (value.getClass() == ArrayList.class || value.getClass() == LinkedHashMap.class
-            /*value.getClass().isInstance(ArrayList.class)  || value.getClass().isInstance(LinkedHashMap.class)*/) {
-            return COMPLEX_VALUE;
+        if (value.getClass() == ArrayList.class || value.getClass() == LinkedHashMap.class) {
+            return "[complex value]";
         }
-        if (value.getClass() == String.class
-            /*value.getClass().isInstance(String.class)*/) {
+        if (value.getClass() == String.class) {
             return "'" + value + "'";
         }
         return value.toString();
